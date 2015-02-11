@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>5C7A67A8-BA6B-4F95-B47C-D696D127119B</string>
+	<key>IDESourceControlProjectName</key>
+	<string>ZWTSessionDemo</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>BD0A26D349D549CE668E8FF5A74E825158F4E4DA</key>
+		<string>github.com:Joywii/ZWTSession.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>ZWTSessionDemo/ZWTSessionDemo.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>BD0A26D349D549CE668E8FF5A74E825158F4E4DA</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:Joywii/ZWTSession.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>BD0A26D349D549CE668E8FF5A74E825158F4E4DA</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>BD0A26D349D549CE668E8FF5A74E825158F4E4DA</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ZWTSession</string>
+		</dict>
+	</array>
+</dict>
+</plist>
