@@ -7,6 +7,8 @@
 //
 
 #import "ViewController.h"
+#import "ZWTHTTPRequest.h"
+
 
 @interface ViewController ()
 
@@ -17,11 +19,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    UIButton *getButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    getButton.frame = CGRectMake(50, 50, 100, 50);
+    getButton.backgroundColor = [UIColor redColor];
+    [getButton addTarget:self action:@selector(getButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [getButton setTitle:@"GET" forState:UIControlStateNormal];
+    [self.view addSubview:getButton];
+    
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)getButtonClick:(id)sender
+{
+    [[ZWTHTTPRequest shareRequest] GET:@"http://club.kuaizhan.com/apiv1/sites/8155653800/forums"
+                            parameters:nil
+                               success:^(NSURLSessionDataTask *task, id responseObject){
+                                   NSLog(@"responseObject %@",responseObject);
+                               }
+                               failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                   
+                               }];
 }
-
 @end
