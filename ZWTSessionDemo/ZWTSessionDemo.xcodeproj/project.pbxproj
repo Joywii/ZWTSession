@@ -18,7 +18,6 @@
 		33B352A41A83462E00EFEB90 /* ZWTSessionDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B352A31A83462E00EFEB90 /* ZWTSessionDemoTests.m */; };
 		33B352B01A8346DD00EFEB90 /* ZWTSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B352AF1A8346DD00EFEB90 /* ZWTSessionManager.m */; };
 		33C55CDD1A8852DA00B7B017 /* ZWTBackgroundRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C55CDC1A8852DA00B7B017 /* ZWTBackgroundRequest.m */; };
-		33C55CE01A8852FC00B7B017 /* ZWTBreakResumeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C55CDF1A8852FC00B7B017 /* ZWTBreakResumeRequest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,8 +52,6 @@
 		33B352AF1A8346DD00EFEB90 /* ZWTSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZWTSessionManager.m; sourceTree = "<group>"; };
 		33C55CDB1A8852DA00B7B017 /* ZWTBackgroundRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZWTBackgroundRequest.h; sourceTree = "<group>"; };
 		33C55CDC1A8852DA00B7B017 /* ZWTBackgroundRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZWTBackgroundRequest.m; sourceTree = "<group>"; };
-		33C55CDE1A8852FC00B7B017 /* ZWTBreakResumeRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZWTBreakResumeRequest.h; sourceTree = "<group>"; };
-		33C55CDF1A8852FC00B7B017 /* ZWTBreakResumeRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZWTBreakResumeRequest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,8 +139,6 @@
 				330209671A888718007AE53D /* ZWTHTTPRequest.m */,
 				33C55CDB1A8852DA00B7B017 /* ZWTBackgroundRequest.h */,
 				33C55CDC1A8852DA00B7B017 /* ZWTBackgroundRequest.m */,
-				33C55CDE1A8852FC00B7B017 /* ZWTBreakResumeRequest.h */,
-				33C55CDF1A8852FC00B7B017 /* ZWTBreakResumeRequest.m */,
 				33B352AE1A8346DD00EFEB90 /* ZWTSessionManager.h */,
 				33B352AF1A8346DD00EFEB90 /* ZWTSessionManager.m */,
 				330209691A89F1A7007AE53D /* ZWTHTTPUtil.h */,
@@ -258,7 +253,6 @@
 				33B352B01A8346DD00EFEB90 /* ZWTSessionManager.m in Sources */,
 				3302096B1A89F1A7007AE53D /* ZWTHTTPUtil.m in Sources */,
 				33B3528A1A83462E00EFEB90 /* main.m in Sources */,
-				33C55CE01A8852FC00B7B017 /* ZWTBreakResumeRequest.m in Sources */,
 				330209681A888718007AE53D /* ZWTHTTPRequest.m in Sources */,
 				33C55CDD1A8852DA00B7B017 /* ZWTBackgroundRequest.m in Sources */,
 			);
