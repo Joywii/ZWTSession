@@ -637,5 +637,4 @@ expectedTotalBytes:(int64_t)expectedTotalBytes
     [delegate URLSession:session downloadTask:downloadTask didResumeAtOffset:fileOffset expectedTotalBytes:expectedTotalBytes];
 
 }
-
 @end

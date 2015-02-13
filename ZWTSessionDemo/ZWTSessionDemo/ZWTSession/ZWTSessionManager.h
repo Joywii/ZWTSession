@@ -53,4 +53,8 @@
                                                 progress:(NSProgress * __autoreleasing *)progress
                                              destination:(NSURL * (^)(NSURL *targetPath, NSURLResponse *response))destination
                                        completionHandler:(void (^)(NSURLResponse *response, NSURL *filePath, NSError *error))completionHandler;
+
+//用来继承
+- (void)URLSessionDidFinishEventsForBackgroundURLSession:(NSURLSession *)session;
+
 @end

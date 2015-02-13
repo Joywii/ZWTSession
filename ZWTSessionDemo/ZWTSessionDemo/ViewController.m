@@ -9,8 +9,11 @@
 #import "ViewController.h"
 #import "ZWTHTTPRequest.h"
 #import "ZWTSessionManager.h"
+#import "ZWTBackgroundRequest.h"
+#import "AppDelegate.h"
 
-@interface ViewController ()
+
+@interface ViewController ()<ZWTBackgroundRequestDelegate>
 
 @property (nonatomic,strong) ZWTSessionManager *sessionManager;
 
@@ -30,21 +33,35 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     UIButton *getButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    getButton.frame = CGRectMake(50, 50, 100, 50);
+    getButton.frame = CGRectMake(50, 50, 125, 50);
     getButton.backgroundColor = [UIColor redColor];
     [getButton addTarget:self action:@selector(getButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [getButton setTitle:@"GET" forState:UIControlStateNormal];
     [self.view addSubview:getButton];
     
+    UIButton *uploadBackButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    uploadBackButton.frame = CGRectMake(50, 125, 125, 25);
+    uploadBackButton.backgroundColor = [UIColor blackColor];
+    [uploadBackButton addTarget:self action:@selector(uploadBackButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [uploadBackButton setTitle:@"UploadBack" forState:UIControlStateNormal];
+    [self.view addSubview:uploadBackButton];
+    
+    UIButton *downloadBackButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    downloadBackButton.frame = CGRectMake(50, 160, 125, 25);
+    downloadBackButton.backgroundColor = [UIColor blackColor];
+    [downloadBackButton addTarget:self action:@selector(downloadBackButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [downloadBackButton setTitle:@"DownloadBack" forState:UIControlStateNormal];
+    [self.view addSubview:downloadBackButton];
+    
     UIButton *breakButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    breakButton.frame = CGRectMake(200, 50, 100, 50);
+    breakButton.frame = CGRectMake(200, 50, 125, 50);
     breakButton.backgroundColor = [UIColor blueColor];
     [breakButton addTarget:self action:@selector(breakButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [breakButton setTitle:@"Resume" forState:UIControlStateNormal];
     [self.view addSubview:breakButton];
     
     UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    cancelButton.frame = CGRectMake(200, 120, 100, 50);
+    cancelButton.frame = CGRectMake(200, 120, 125, 50);
     cancelButton.backgroundColor = [UIColor blueColor];
     [cancelButton addTarget:self action:@selector(cancelButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [cancelButton setTitle:@"取消" forState:UIControlStateNormal];
@@ -80,14 +97,55 @@
                                    
                                }];
 }
+- (void)uploadBackButtonClick:(id)sender
+{
+    NSURLSessionConfiguration *config = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:@"com.joywii.BackgroundUpload.BackgroundSession"];
+    //TODO :
+}
+- (void)downloadBackButtonClick:(id)sender
+{
+    NSURLSessionConfiguration *config = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:@"com.joywii.BackgroundDownload.BackgroundSession"];
+    ZWTBackgroundRequest *downloadBackRequest = [[ZWTBackgroundRequest alloc] initWithDelegate:self
+                                                                         sessionConfiguration:config];
+    NSURLSessionDownloadTask *downloadTast = [downloadBackRequest downloadBackground:@"http://farm3.staticflickr.com/2831/9823890176_82b4165653_b_d.jpg" parameters:nil progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+        
+        return [self destinationPath:targetPath];
+    } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+        
+        NSLog(@"back filePath: %@",filePath);
+        if (filePath) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIImage *image = [UIImage imageWithContentsOfFile:[filePath path]];
+                self.imageView.image = image;
+                self.imageView.contentMode = UIViewContentModeScaleAspectFill;
+                self.imageView.hidden = NO;
+            });
+        }
+    }];
+    [downloadTast resume];
+}
+- (void)didFinishEventsForBackgroundURLSession:(NSURLSession *)session
+{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if(appDelegate.backgroundURLSessionCompletionHandler) {
+        void (^handler)() = appDelegate.backgroundURLSessionCompletionHandler;
+        appDelegate.backgroundURLSessionCompletionHandler = nil;
+        handler();
+    }
+}
+- (NSURL *)destinationPath:(NSURL *)targetPath
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSArray *URLs = [fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
+    NSURL *documentsDirectory = URLs[0];
+    NSURL *destinationPath = [documentsDirectory URLByAppendingPathComponent:[targetPath lastPathComponent]];
+    return destinationPath;
+}
+
 - (void)breakButtonClick:(id)sender
 {
     NSURL *(^destinationBlock)(NSURL *targetPath, NSURLResponse *response) = ^NSURL *(NSURL *targetPath, NSURLResponse *response){
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        NSArray *URLs = [fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
-        NSURL *documentsDirectory = URLs[0];
-        NSURL *destinationPath = [documentsDirectory URLByAppendingPathComponent:[targetPath lastPathComponent]];
-        return destinationPath;
+        return [self destinationPath:targetPath];
     };
     
     void (^completeBlock)(NSURLResponse *response, NSURL *filePath, NSError *error) = ^(NSURLResponse *response, NSURL *filePath, NSError *error) {
